@@ -39,6 +39,7 @@ SRCS += $(addprefix sensors/,   \
 	hm01b0.c                    \
 	gc2145.c                    \
 	paj6100.c                   \
+	h7stereocam.c               \
    )
 
 SRCS += $(addprefix imlib/,     \

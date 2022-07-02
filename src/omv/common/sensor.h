@@ -14,14 +14,15 @@
 #include "cambus.h"
 #include "imlib.h"
 
-#define OV2640_SLV_ADDR     (0x60)
-#define OV5640_SLV_ADDR     (0x78)
-#define OV7725_SLV_ADDR     (0x42)
-#define MT9V034_SLV_ADDR    (0xB8)
-#define MT9M114_SLV_ADDR    (0x90)
-#define LEPTON_SLV_ADDR     (0x54)
-#define HM01B0_SLV_ADDR     (0x48)
-#define GC2145_SLV_ADDR     (0x78)
+#define OV2640_SLV_ADDR         (0x60)
+#define OV5640_SLV_ADDR         (0x78)
+#define OV7725_SLV_ADDR         (0x42)
+#define MT9V034_SLV_ADDR        (0xB8)
+#define MT9M114_SLV_ADDR        (0x90)
+#define LEPTON_SLV_ADDR         (0x54)
+#define HM01B0_SLV_ADDR         (0x48)
+#define GC2145_SLV_ADDR         (0x78)
+#define H7STEREOCAM_SLV_ADDR    (0xC8)
 
 // Chip ID Registers
 #define OV5640_CHIP_ID      (0x300A)
@@ -42,6 +43,7 @@
 #define LEPTON_ID           (0x54)
 #define HM01B0_ID           (0xB0)
 #define GC2145_ID           (0x21)
+#define H7STEREOCAM_ID      (0x14)
 // Wide ID
 #define PAJ6100_ID          (0x6100)
 
@@ -90,6 +92,7 @@ typedef enum {
     FRAMESIZE_QXGA,     // 2048x1536
     FRAMESIZE_WQXGA,    // 2560x1600
     FRAMESIZE_WQXGA2,   // 2592x1944
+    FRAMESIZE_QWGA_DW,  // 640x240
 } framesize_t;
 
 typedef enum {

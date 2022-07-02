@@ -1003,6 +1003,7 @@ STATIC const mp_map_elem_t globals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_MT9V034),             MP_OBJ_NEW_SMALL_INT(MT9V034_ID)},
     { MP_OBJ_NEW_QSTR(MP_QSTR_LEPTON),              MP_OBJ_NEW_SMALL_INT(LEPTON_ID)},
     { MP_OBJ_NEW_QSTR(MP_QSTR_HM01B0),              MP_OBJ_NEW_SMALL_INT(HM01B0_ID)},
+    { MP_OBJ_NEW_QSTR(MP_QSTR_H7STEREOCAM),         MP_OBJ_NEW_SMALL_INT(H7STEREOCAM_ID)},
 
     // Special effects
     { MP_OBJ_NEW_QSTR(MP_QSTR_NORMAL),              MP_OBJ_NEW_SMALL_INT(SDE_NORMAL)},          /* Normal/No SDE */
@@ -1051,6 +1052,7 @@ STATIC const mp_map_elem_t globals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_QXGA),                MP_OBJ_NEW_SMALL_INT(FRAMESIZE_QXGA)},     /* 2048x1536 */
     { MP_OBJ_NEW_QSTR(MP_QSTR_WQXGA),               MP_OBJ_NEW_SMALL_INT(FRAMESIZE_WQXGA)},    /* 2560x1600 */
     { MP_OBJ_NEW_QSTR(MP_QSTR_WQXGA2),              MP_OBJ_NEW_SMALL_INT(FRAMESIZE_WQXGA2)},   /* 2592x1944 */
+    { MP_OBJ_NEW_QSTR(MP_QSTR_QVGA_DW),             MP_OBJ_NEW_SMALL_INT(FRAMESIZE_QWGA_DW)},   /* 2592x1944 */
 
     // Color Palettes
     { MP_OBJ_NEW_QSTR(MP_QSTR_PALETTE_RAINBOW),     MP_OBJ_NEW_SMALL_INT(COLOR_PALETTE_RAINBOW)},
