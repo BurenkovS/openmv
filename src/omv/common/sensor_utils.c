@@ -30,6 +30,7 @@
 #include "paj6100.h"
 #include "frogeye2020.h"
 #include "gc2145.h"
+#include "h7stereocam.h"
 #include "framebuffer.h"
 #include "omv_boardconfig.h"
 
@@ -87,6 +88,8 @@ const int resolution[][2] = {
     {2048, 1536},    /* QXGA      */
     {2560, 1600},    /* WQXGA     */
     {2592, 1944},    /* WQXGA2    */
+    // Double width Resolutions
+    {640, 240},      /* QVGA_DW   */
 };
 
 __weak void sensor_init0()
@@ -280,6 +283,12 @@ int sensor_probe_init(uint32_t bus_id, uint32_t bus_speed)
             break;
         #endif // (OMV_ENABLE_HM01B0 == 1) || (OMV_ENABLE_HM0360 == 1)
 
+        #if (OMV_ENABLE_H7STEREOCAM == 1)
+        case H7STEREOCAM_SLV_ADDR:
+            sensor.chip_id = H7STEREOCAM_ID;
+            break;
+        #endif //(OMV_ENABLE_H7STEREOCAM == 1)
+
         #if (OMV_ENABLE_GC2145 == 1)
         case GC2145_SLV_ADDR:
             cambus_readb(&sensor.bus, sensor.slv_addr, GC_CHIP_ID, &sensor.chip_id);
@@ -442,6 +451,14 @@ int sensor_probe_init(uint32_t bus_id, uint32_t bus_speed)
             init_ret = frogeye2020_init(&sensor);
             break;
         #endif // (OMV_ENABLE_FROGEYE2020 == 1)
+        #if (OMV_ENABLE_H7STEREOCAM == 1)
+        case H7STEREOCAM_ID:
+            if (sensor_set_xclk_frequency(H7STEREOCAM_XCLK_FREQ) != 0) {
+                return SENSOR_ERROR_TIM_INIT_FAILED;
+            }
+            init_ret = h7stereocam_init(&sensor);
+            break;
+        #endif //(OMV_ENABLE_H7STEREOCAM == 1)
 
         default:
             return SENSOR_ERROR_ISC_UNSUPPORTED;

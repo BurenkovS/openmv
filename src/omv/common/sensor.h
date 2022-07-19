@@ -23,6 +23,7 @@
 #define HM0XX0_SLV_ADDR         (0x48)
 #define GC2145_SLV_ADDR         (0x78)
 #define FROGEYE2020_SLV_ADDR    (0x6E)
+#define H7STEREOCAM_SLV_ADDR    (0xC8)
 
 // Chip ID Registers
 #define OV5640_CHIP_ID          (0x300A)
@@ -57,6 +58,7 @@
 #define GC2145_ID               (0x21)
 #define PAJ6100_ID              (0x6100)
 #define FROGEYE2020_ID          (0x2020)
+#define H7STEREOCAM_ID          (0x14)
 
 typedef enum {
     FRAMESIZE_INVALID = 0,
@@ -103,6 +105,7 @@ typedef enum {
     FRAMESIZE_QXGA,     // 2048x1536
     FRAMESIZE_WQXGA,    // 2560x1600
     FRAMESIZE_WQXGA2,   // 2592x1944
+    FRAMESIZE_QWGA_DW,  // 640x240
 } framesize_t;
 
 typedef enum {
