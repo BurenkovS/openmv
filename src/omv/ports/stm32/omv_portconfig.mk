@@ -7,7 +7,7 @@ LDSCRIPT  ?= stm32fxxx
 CFLAGS += -std=gnu99 -Wall -Werror -Warray-bounds -mthumb -nostartfiles -fdata-sections -ffunction-sections
 CFLAGS += -fno-inline-small-functions -D$(MCU) -D$(CFLAGS_MCU) -D$(ARM_MATH) -DARM_NN_TRUNCATE\
           -fsingle-precision-constant -Wdouble-promotion -mcpu=$(CPU) -mtune=$(CPU) -mfpu=$(FPU) -mfloat-abi=hard
-CFLAGS += -D__FPU_PRESENT=1 -D__VFP_FP__ -DUSE_USB_FS -DUSE_DEVICE_MODE -DUSE_USB_OTG_ID=0 -DHSE_VALUE=$(OMV_HSE_VALUE)\
+CFLAGS += -D__FPU_PRESENT=1 -D__VFP_FP__ -DUSE_DEVICE_MODE -DHSE_VALUE=$(OMV_HSE_VALUE)\
           -D$(TARGET) -DVECT_TAB_OFFSET=$(VECT_TAB_OFFSET) -DMAIN_APP_ADDR=$(MAIN_APP_ADDR) -DSTM32_HAL_H=$(HAL_INC)
 CFLAGS += $(OMV_BOARD_EXTRA_CFLAGS)
 
@@ -27,7 +27,8 @@ MPY_CFLAGS += -I$(TOP_DIR)/$(MICROPY_DIR)/ports/stm32/usbdev/core/inc/
 MPY_CFLAGS += -I$(TOP_DIR)/$(MICROPY_DIR)/ports/stm32/usbdev/class/inc/
 MPY_CFLAGS += -I$(TOP_DIR)/$(MICROPY_DIR)/ports/stm32/lwip_inc/
 MPY_CFLAGS += -DMICROPY_PY_USSL=1 -DMICROPY_SSL_MBEDTLS=1
-MICROPY_ARGS += MICROPY_PY_USSL=1 MICROPY_SSL_MBEDTLS=1 MICROPY_PY_BTREE=1
+MICROPY_ARGS += MICROPY_PY_USSL=1 MICROPY_SSL_MBEDTLS=1 MICROPY_PY_BTREE=1\
+                STM32LIB_CMSIS_DIR=$(TOP_DIR)/$(CMSIS_DIR) STM32LIB_HAL_DIR=$(TOP_DIR)/$(HAL_DIR)
 
 OMV_CFLAGS += -I$(OMV_BOARD_CONFIG_DIR)
 OMV_CFLAGS += -I$(TOP_DIR)/$(OMV_DIR)/
@@ -54,6 +55,7 @@ OMV_CFLAGS += -I$(BUILD)/$(TENSORFLOW_DIR)/
 OMV_CFLAGS += -I$(TOP_DIR)/$(LIBPDM_DIR)/
 
 ifeq ($(OMV_ENABLE_BL), 1)
+CFLAGS     += -DOMV_ENABLE_BOOTLOADER
 BL_CFLAGS  := $(CFLAGS) $(HAL_CFLAGS)
 BL_CFLAGS  += -I$(OMV_BOARD_CONFIG_DIR)
 BL_CFLAGS  += -I$(TOP_DIR)/$(BOOTLDR_DIR)/include/
@@ -282,7 +284,6 @@ FIRM_OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/,\
 	extint.o                \
 	modpyb.o                \
 	modstm.o                \
-	moduos.o                \
 	modutime.o              \
 	network_lan.o           \
 	modmachine.o            \
@@ -376,6 +377,7 @@ FIRM_OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/extmod/,\
 	modutimeq.o         \
 	moduheapq.o         \
 	moductypes.o        \
+	moduos.o            \
 	vfs.o               \
 	vfs_fat.o           \
 	vfs_fat_file.o      \
@@ -427,6 +429,7 @@ FIRM_OBJ += $(addprefix $(BUILD)/$(MICROPY_DIR)/modules/ulab/,\
 	code/numpy/fft/fft.o                \
 	code/numpy/fft/fft_tools.o          \
 	code/numpy/filter.o                 \
+	code/numpy/io/io.o                  \
 	code/numpy/linalg/linalg.o          \
 	code/numpy/linalg/linalg_tools.o    \
 	code/numpy/ndarray/ndarray_iter.o   \
@@ -519,6 +522,7 @@ UVC_OBJ += $(addprefix $(BUILD)/$(CMSIS_DIR)/src/,\
 
 UVC_OBJ += $(addprefix $(BUILD)/$(OMV_DIR)/alloc/, \
 	fb_alloc.o                              \
+	dma_alloc.o                             \
 	unaligned_memcpy.o                      \
 	)
 

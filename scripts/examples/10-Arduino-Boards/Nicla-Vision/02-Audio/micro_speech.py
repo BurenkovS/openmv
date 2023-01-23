@@ -1,3 +1,8 @@
+# MicroSpeech demo.
+#
+# Download the pre-trained Yes/No model from here:
+# https://raw.githubusercontent.com/iabdalkader/microspeech-yesno-model/main/model.tflite
+# Save the model to storage, reset and run the example.
 import audio, time, tf, micro_speech, pyb
 labels = ['Silence', 'Unknown', 'Yes', 'No']
 

@@ -20,10 +20,6 @@
 // Needed by the SWD JTAG testrig - located at the bottom of the frame buffer stack.
 #define OMV_SELF_TEST_SWD_ADDR  MAIN_FB()->pixfmt
 
-// Flash sectors for the bootloader.
-// Flash FS sector, main FW sector, max sector.
-#define OMV_FLASH_LAYOUT        {1, 2, 15}
-
 #define OMV_XCLK_MCO            (0U)
 #define OMV_XCLK_TIM            (1U)
 
@@ -47,10 +43,6 @@
 #define OMV_OV5640_REV_Y_FREQ   (25000000)
 #define OMV_OV5640_REV_Y_CTRL2  (0x54)
 #define OMV_OV5640_REV_Y_CTRL3  (0x13)
-
-// Bootloader LED GPIO port/pin
-#define OMV_BOOTLDR_LED_PIN     (GPIO_PIN_1)
-#define OMV_BOOTLDR_LED_PORT    (GPIOC)
 
 // Enable hardware JPEG
 #define OMV_HARDWARE_JPEG       (1)
@@ -173,10 +165,9 @@
 #define OMV_FIR_LEPTON_BUF_SIZE (1K)        // FIR Lepton Packet Double Buffer (328 bytes)
 #define OMV_JPEG_BUF_SIZE       (32 * 1024) // IDE JPEG buffer (header + data).
 
-#define OMV_BOOT_ORIGIN         0x08000000
-#define OMV_BOOT_LENGTH         128K
-#define OMV_TEXT_ORIGIN         0x08040000
-#define OMV_TEXT_LENGTH         1792K
+// Memory map.
+#define OMV_FLASH_ORIGIN        0x08000000
+#define OMV_FLASH_LENGTH        2048K
 #define OMV_DTCM_ORIGIN         0x20000000  // Note accessible by CPU and MDMA only.
 #define OMV_DTCM_LENGTH         128K
 #define OMV_ITCM_ORIGIN         0x00000000
@@ -191,6 +182,12 @@
 #define OMV_SRAM4_LENGTH        64K
 #define OMV_AXI_SRAM_ORIGIN     0x24000000
 #define OMV_AXI_SRAM_LENGTH     512K
+
+// Flash configuration.
+#define OMV_FLASH_FFS_ORIGIN    0x08020000
+#define OMV_FLASH_FFS_LENGTH    128K
+#define OMV_FLASH_TXT_ORIGIN    0x08040000
+#define OMV_FLASH_TXT_LENGTH    1792K
 
 // Domain 1 DMA buffers region.
 #define OMV_DMA_MEMORY_D1       AXI_SRAM

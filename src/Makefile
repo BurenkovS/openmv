@@ -103,11 +103,12 @@ include $(OMV_BOARD_CONFIG_DIR)/omv_boardconfig.mk
 #include $(MP_BOARD_CONFIG_DIR)/mpconfigboard.mk
 
 # Additional qstr definitions for OpenMV
-OMV_SRC_QSTR := $(wildcard $(TOP_DIR)/$(OMV_DIR)/modules/*.c)
-OMV_SRC_QSTR += $(wildcard $(TOP_DIR)/$(OMV_DIR)/ports/$(PORT)/modules/*.c)
+#OMV_SRC_QSTR := $(wildcard $(TOP_DIR)/$(OMV_DIR)/modules/*.c)
 
 # The following command line args are passed to MicroPython's top Makefile.
-MICROPY_ARGS = PORT=$(PORT) BOARD=$(TARGET) DEBUG=$(DEBUG) MPY_LIB_DIR=$(MPY_LIB_DIR) MICROPY_ROM_TEXT_COMPRESSION=$(ROM_TEXT_COMPRESSION) USER_C_MODULES=$(TOP_DIR)/$(OMV_DIR) #OMV_SRC_QSTR="$(OMV_SRC_QSTR)"
+MICROPY_ARGS = PORT=$(PORT) BOARD=$(TARGET) DEBUG=$(DEBUG) MPY_LIB_DIR=$(MPY_LIB_DIR)\
+               FROZEN_MANIFEST=$(FROZEN_MANIFEST) OMV_SRC_QSTR="$(OMV_SRC_QSTR)"\
+               MICROPY_ROM_TEXT_COMPRESSION=$(ROM_TEXT_COMPRESSION) USER_C_MODULES=$(TOP_DIR)/$(OMV_DIR)
 
 # Configure additional built-in modules. Note must define both the CFLAGS and the Make command line args.
 ifeq ($(MICROPY_PY_SENSOR), 1)
@@ -123,6 +124,11 @@ endif
 ifeq ($(MICROPY_PY_IMU), 1)
 MPY_CFLAGS += -DMICROPY_PY_IMU=1
 MICROPY_ARGS += MICROPY_PY_IMU=1
+endif
+
+ifeq ($(MICROPY_PY_TOF), 1)
+MPY_CFLAGS += -DMICROPY_PY_TOF=1
+MICROPY_ARGS += MICROPY_PY_TOF=1
 endif
 
 ifeq ($(MICROPY_PY_ULAB), 1)

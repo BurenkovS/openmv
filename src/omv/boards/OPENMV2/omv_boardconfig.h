@@ -20,10 +20,6 @@
 // Needed by the SWD JTAG testrig - located at the bottom of the frame buffer stack.
 #define OMV_SELF_TEST_SWD_ADDR  MAIN_FB()->pixfmt
 
-// Flash sectors for the bootloader.
-// Flash FS sector, main FW sector, max sector.
-#define OMV_FLASH_LAYOUT        {1, 4, 11}
-
 #define OMV_XCLK_MCO            (0U)
 #define OMV_XCLK_TIM            (1U)
 
@@ -38,10 +34,6 @@
 
 // Sensor Banding Filter Value
 #define OMV_OV7725_BANDING      (0x3F)
-
-// Bootloader LED GPIO port/pin
-#define OMV_BOOTLDR_LED_PIN     (GPIO_PIN_2)
-#define OMV_BOOTLDR_LED_PORT    (GPIOC)
 
 // Enable sensor drivers
 #define OMV_ENABLE_OV2640       (1)
@@ -115,16 +107,21 @@
 #define OMV_FFS_BUF_SIZE    (16K)   // Flash filesystem cache
 #define OMV_JPEG_BUF_SIZE   (8 * 1024)  // IDE JPEG buffer size (header + data).
 
-#define OMV_BOOT_ORIGIN     0x08000000
-#define OMV_BOOT_LENGTH     16K
-#define OMV_TEXT_ORIGIN     0x08010000
-#define OMV_TEXT_LENGTH     960K
+// Memory map.
+#define OMV_FLASH_ORIGIN    0x08000000
+#define OMV_FLASH_LENGTH    1024K
 #define OMV_DTCM_ORIGIN     0x10000000
 #define OMV_DTCM_LENGTH     64K
 #define OMV_SRAM1_ORIGIN    0x20000000
 #define OMV_SRAM1_LENGTH    162K
 #define OMV_SRAM2_ORIGIN    0x20028800
 #define OMV_SRAM2_LENGTH    30K
+
+// Flash configuration.
+#define OMV_FLASH_FFS_ORIGIN    0x08004000
+#define OMV_FLASH_FFS_LENGTH    48K
+#define OMV_FLASH_TXT_ORIGIN    0x08010000
+#define OMV_FLASH_TXT_LENGTH    960K
 
 // Image sensor I2C
 #define ISC_I2C                 (I2C1)
